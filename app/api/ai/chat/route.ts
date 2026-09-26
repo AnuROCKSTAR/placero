@@ -14,13 +14,26 @@ export async function POST(request: Request) {
 
     const prompt = buildGeminiPrompt({
       userMessage: data.message,
-      context: data.context ?? 'Student is preparing for campus placements. Recommend practical next steps.'
+      context: data.context ?? 'The student is preparing for placements in engineering and wants practical, verified guidance.'
     });
 
-    const answer = await askGemini(prompt);
+    const aiResult = await askGemini(prompt);
 
-    return NextResponse.json({ success: true, answer });
+    return NextResponse.json({
+      success: true,
+      answer: {
+        content: aiResult.answer,
+        confidence: aiResult.confidence ?? 0.7
+      }
+    });
   } catch (error) {
-    return NextResponse.json({ success: false, message: 'Unable to process AI request' }, { status: 400 });
+    return NextResponse.json(
+      {
+        success: false,
+        message: 'Unable to process AI request. Please provide a valid prompt.',
+        fallback: 'Review your target company and study plan, then ask again.'
+      },
+      { status: 400 }
+    );
   }
 }

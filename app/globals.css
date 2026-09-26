@@ -1,35 +1,116 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+# Placero
 
-:root {
-  color-scheme: dark;
-}
+Placero is a student-focused placement preparation platform built for engineering students who want to learn, practice, prove, and improve for campus hiring. The product combines AI coaching, company-specific preparation, daily missions, skill tracking, and portfolio proof-building into one polished experience.
 
-html {
-  scroll-behavior: smooth;
-}
+## Product vision
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  background: #020817;
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
-}
+The product follows a simple philosophy:
 
-* {
-  box-sizing: border-box;
-}
+- Learn
+- Practice
+- Prove
+- Improve
+- Repeat
 
-::selection {
-  background: rgba(59, 130, 246, 0.4);
-}
+It helps students move beyond course completion and toward evidence-based readiness for interviews and placements.
 
-button, input, textarea {
-  font: inherit;
-}
+## Features
 
-.rounded-3xl {
-  border-radius: 1.5rem;
-}
+- Personalized student onboarding
+- Dashboard with readiness and daily mission tracking
+- Company war room for target employers
+- Skill heatmap and branch-specific learning paths
+- AI career coach with Gemini integration
+- Resume bullet lab and proof-of-execution modules
+- Mock interview workflow and mistake vault
+- Student-friendly dark premium UI with a custom logo
+- Prisma schema and seed data ready for PostgreSQL
+
+## Tech stack
+
+- Next.js 14
+- React + TypeScript
+- Tailwind CSS
+- Prisma ORM
+- PostgreSQL
+- NextAuth-compatible auth layer
+- Google Gemini API
+- Vitest
+
+## Project structure
+
+```text
+app/
+  api/
+  auth/
+  companies/
+  dashboard/
+  skills/
+  ai/
+  globals.css
+  layout.tsx
+  page.tsx
+components/
+  Navbar.tsx
+  Footer.tsx
+  CompanyCard.tsx
+  MissionCard.tsx
+  SkillHeatmap.tsx
+  AIChatBox.tsx
+lib/
+  data.ts
+  prisma.ts
+  scoring.ts
+prisma/
+  schema.prisma
+  seed.ts
+server/
+  services/
+    gemini.ts
+public/
+  logo.svg
+tests/
+  readiness.test.ts
+```
+
+## Local setup
+
+```bash
+npm install
+cp .env.example .env.local
+npx prisma generate
+npx prisma migrate dev --name init
+npm run seed
+npm run dev
+```
+
+## Environment variables
+
+The app expects variables like:
+
+```env
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/placero?schema=public
+GEMINI_API_KEY=
+AUTH_SECRET=your-secret
+NEXTAUTH_URL=http://localhost:3000
+```
+
+See `.env.example` for a full reference.
+
+## Scripts
+
+```bash
+npm run dev
+npm run build
+npm run start
+npm run seed
+npm test
+```
+
+## Deployment
+
+This project is designed for a Vercel + PostgreSQL deployment flow, but it can also be used locally for development and demonstration.
+
+## Notes
+
+This is a hackathon-ready foundation with a strong product direction and modular architecture. It intentionally prioritizes product polish, company prep, AI support, and student mentorship in a modern interface.

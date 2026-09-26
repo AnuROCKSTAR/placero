@@ -1,15 +1,33 @@
-import type { Metadata } from 'next';
-import './globals.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-export const metadata: Metadata = {
-  title: 'Placero | Student Placement Prep',
-  description: 'Placement OS for engineers and students to prepare, practice, prove, and improve.'
-};
+:root {
+  color-scheme: dark;
+}
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
-  );
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #020817;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+button, input, textarea {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(59, 130, 246, 0.45);
+}
+
+.shadow-glow {
+  box-shadow: 0 20px 45px rgba(37, 99, 235, 0.35);
 }

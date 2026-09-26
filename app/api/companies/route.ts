@@ -7,9 +7,16 @@ export async function GET() {
 
 export async function POST(request: Request) {
   const body = await request.json();
-  return NextResponse.json({ success: true, companies: companySeed.filter((company) => {
-    const term = (body?.query ?? '').toLowerCase();
-    if (!term) return true;
-    return company.name.toLowerCase().includes(term) || company.industry.toLowerCase().includes(term);
-  }) });
+  const query = String(body?.query ?? '').toLowerCase();
+
+  const filtered = companySeed.filter((company) => {
+    if (!query) return true;
+    return (
+      company.name.toLowerCase().includes(query) ||
+      company.industry.toLowerCase().includes(query) ||
+      company.skills.some((skill) => skill.toLowerCase().includes(query))
+    );
+  });
+
+  return NextResponse.json({ success: true, companies: filtered });
 }
