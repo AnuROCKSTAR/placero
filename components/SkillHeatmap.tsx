@@ -1,4 +1,4 @@
-export function SkillHeatmap({ skills }: { skills: Array<{ name: string; level: number; color: string }> }) {
+export function SkillHeatmap({ skills }: { skills: any[] }) {
   return (
     <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
       {skills.map((skill) => (

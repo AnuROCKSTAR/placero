@@ -1,10 +1,8 @@
 import { NextResponse } from 'next/server';
-import { dashboardStats, missionSeed } from '../../../lib/data';
 
 export async function GET() {
   return NextResponse.json({
     success: true,
-    stats: dashboardStats,
-    missions: missionSeed
+    message: 'Placero uses a student-first readiness system with measurable skill tracking and proof-based progress.'
   });
 }

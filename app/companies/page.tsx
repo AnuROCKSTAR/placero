@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
-import { companySeed, skillSeed } from '../lib/data';
+import { companySeed, skillSeed, missionSeed } from '../lib/data';
 import { CompanyCard } from '../components/CompanyCard';
 import { SkillHeatmap } from '../components/SkillHeatmap';
 

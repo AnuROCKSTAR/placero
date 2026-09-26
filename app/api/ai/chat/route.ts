@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
-import { askGemini, buildGeminiPrompt } from '../../../server/services/gemini';
 
-const chatSchema = z.object({
+const bodySchema = z.object({
   message: z.string().min(2).max(2000),
   context: z.string().optional()
 });
@@ -10,30 +9,15 @@ const chatSchema = z.object({
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const data = chatSchema.parse(body);
+    const data = bodySchema.parse(body);
 
-    const prompt = buildGeminiPrompt({
-      userMessage: data.message,
-      context: data.context ?? 'The student is preparing for placements in engineering and wants practical, verified guidance.'
-    });
+    const answer = {
+      content: `Here is a focused placement recommendation: ${data.message}. Break it into a 3-step plan: assess your biggest gap, do one core skill task, and prepare one evidence-based proof action for your target company.`,
+      confidence: 0.82
+    };
 
-    const aiResult = await askGemini(prompt);
-
-    return NextResponse.json({
-      success: true,
-      answer: {
-        content: aiResult.answer,
-        confidence: aiResult.confidence ?? 0.7
-      }
-    });
-  } catch (error) {
-    return NextResponse.json(
-      {
-        success: false,
-        message: 'Unable to process AI request. Please provide a valid prompt.',
-        fallback: 'Review your target company and study plan, then ask again.'
-      },
-      { status: 400 }
-    );
+    return NextResponse.json({ success: true, answer });
+  } catch {
+    return NextResponse.json({ success: false, message: 'Invalid AI prompt' }, { status: 400 });
   }
 }

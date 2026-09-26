@@ -11,11 +11,11 @@ export default function SignInPage() {
       <form className="space-y-4">
         <div>
           <label className="mb-2 block text-sm font-medium text-slate-300">Email</label>
-          <input type="email" className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none ring-0 transition focus:border-blue-500" placeholder="you@example.com" />
+          <input type="email" className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none focus:border-blue-500" placeholder="you@example.com" />
         </div>
         <div>
           <label className="mb-2 block text-sm font-medium text-slate-300">Password</label>
-          <input type="password" className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none ring-0 transition focus:border-blue-500" placeholder="••••••••" />
+          <input type="password" className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-white outline-none focus:border-blue-500" placeholder="••••••••" />
         </div>
         <button type="submit" className="w-full rounded-2xl bg-blue-600 px-4 py-3 font-semibold text-white hover:bg-blue-500">
           Sign in

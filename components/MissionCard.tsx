@@ -1,4 +1,4 @@
-export function MissionCard({ mission }: { mission: { title: string; duration: string; type: string; progress: number } }) {
+export function MissionCard({ mission }: { mission: any }) {
   return (
     <div className="rounded-3xl border border-slate-800 bg-slate-900/80 p-5">
       <div className="flex items-center justify-between gap-4">

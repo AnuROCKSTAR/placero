@@ -1,17 +1,16 @@
 import { NextResponse } from 'next/server';
 import { companySeed } from '../../../lib/data';
 
-export async function GET(request: Request) {
-  const url = new URL(request.url);
-  const q = url.searchParams.get('q');
+export async function GET(
+  request: Request,
+  { params }: { params: { name: string } }
+) {
+  const decoded = decodeURIComponent(params.name);
+  const company = companySeed.find((item) => item.name.toLowerCase() === decoded.toLowerCase());
 
-  const filtered = q
-    ? companySeed.filter((company) =>
-        company.name.toLowerCase().includes(q.toLowerCase()) ||
-        company.industry.toLowerCase().includes(q.toLowerCase()) ||
-        company.roles.some((role) => role.toLowerCase().includes(q.toLowerCase()))
-      )
-    : companySeed;
+  if (!company) {
+    return NextResponse.json({ success: false, message: 'Company not found' }, { status: 404 });
+  }
 
-  return NextResponse.json({ success: true, companies: filtered });
+  return NextResponse.json({ success: true, company });
 }
